@@ -20,6 +20,7 @@ class TestHog:
         self.driver.get("https://baidu.com/")
         self.driver.find_element_by_id("kw").send_keys("selenium测试")
         element = self.driver.execute_script("return document.getElementById('su')")
+
         element.click()
         time.sleep(5)
         self.driver.execute_script("document.documentElement.scrollTop=10000")

@@ -1,5 +1,6 @@
 import pytest
 from pythoncode.calculator import Calculator
+from selenium import webdriver
 
 
 # @pytest.fixture()
@@ -12,8 +13,17 @@ from pythoncode.calculator import Calculator
 # 	print("登录:,%s" % request.param)
 
 
-@pytest.fixture()
+@pytest.fixture(scope="function", autouse="true")
 def shilihua():
     cal = Calculator()
     return cal
     print("实例化类")
+
+
+@pytest.fixture(autouse="false", scope="module")
+def myfixture():
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    driver.implicitly_wait(10)
+    yield driver
+    driver.quit()
